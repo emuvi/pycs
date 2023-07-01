@@ -38,15 +38,15 @@ def find_folder_starting_with(path, prefix):
 
 def get_tema(root):
     tag = find_folder_starting_with(
-        root, input("Qual a tag da disciplina? : "))
+        root, input("Qual o começo do nome da disciplina? : "))
     while not tag:
         tag = find_folder_starting_with(
-            root, input("Qual a tag da disciplina? : "))
+            root, input("Qual o começo do nome da disciplina? : "))
     tema = find_folder_starting_with(
-        tag, 'Tema ' + input("Qual o tema da disciplina? : "))
+        tag, input("Qual o começo do nome do tema? : "))
     while not tema:
         tema = find_folder_starting_with(
-            tag, 'Tema ' + input("Qual o tema da disciplina? : "))
+            tag,  input("Qual o começo do nome do tema? : "))
     return tema
 
 
