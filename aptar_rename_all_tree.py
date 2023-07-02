@@ -19,7 +19,7 @@ def rename_all(path, depth):
                     if ' ' in part:
                         part = part.split(' ')[1]
                     prefix = part + '-' + prefix
-            prefix = 'AP-' + prefix
+            prefix = 'A-' + prefix
             kind = os.path.splitext(origin)[1]
             folder = os.path.dirname(origin)
             attempt = 1
