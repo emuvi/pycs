@@ -12,23 +12,18 @@ def rename_all(path, depth):
         for item in files_and_size:
             origin = item[0]
             parts = origin.split(os.sep)
-            prefix = ''
-            if depth > 1:
-                for i in range(2, depth + 2):
-                    part = parts[-i].split('-')[0].strip()
-                    if ' ' in part:
-                        part = part.split(' ')[1]
-                    prefix = part + '-' + prefix
-            prefix = 'A-' + prefix
+            prefix = parts[-2]
+            if not parts[-1].startswith('APT - '):
+                prefix = 'APT - ' + prefix
+            else:
+                prefix = 'AP - ' + prefix
             kind = os.path.splitext(origin)[1]
             folder = os.path.dirname(origin)
             attempt = 1
-            destiny = os.path.join(
-                folder, prefix + '(' + str(attempt) + ')' + kind)
+            destiny = os.path.join(folder, prefix + ' (' + str(attempt) + ')' + kind)
             while os.path.exists(destiny):
                 attempt += 1
-                destiny = os.path.join(
-                    folder, prefix + '(' + str(attempt) + ')' + kind)
+                destiny = os.path.join(folder, prefix + ' (' + str(attempt) + ')' + kind)
             os.rename(origin, destiny)
             print(origin, " -> ", destiny)
         for inside in os.listdir(path):
