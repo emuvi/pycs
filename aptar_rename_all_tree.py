@@ -1,7 +1,9 @@
 import os
 
+last_prefix = 'APT - '
 
 def rename_all(path, depth):
+    global last_prefix
     if os.path.isdir(path):
         files_and_size = []
         for inside in os.listdir(path):
@@ -13,10 +15,14 @@ def rename_all(path, depth):
             origin = item[0]
             parts = origin.split(os.sep)
             prefix = parts[-2]
-            if not parts[-1].startswith('APT - '):
+            if not parts[-1].startswith('APT - ') and not parts[-1].startswith('AP - '):
+                prefix = last_prefix + prefix
+            elif not parts[-1].startswith('APT - '):
                 prefix = 'APT - ' + prefix
+                last_prefix = 'APT - '
             else:
                 prefix = 'AP - ' + prefix
+                last_prefix = 'AP - '
             kind = os.path.splitext(origin)[1]
             folder = os.path.dirname(origin)
             attempt = 1
